@@ -6,8 +6,6 @@ let quizzes;
 const HomePage = async () => {
   try {
     clearPage();
-    // eslint-disable-next-line no-console
-    console.log(process.env.API_BASE_URL);
     const response = await fetch(`${process.env.API_BASE_URL}/quiz`);
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
     quizzes = await response.json();

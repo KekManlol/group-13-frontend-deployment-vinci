@@ -1,3 +1,4 @@
+import { removePathPrefix, usePathPrefix } from '../../utils/path-prefix';
 import HomePage from '../Pages/HomePage';
 import RegisterPage from '../Pages/RegisterPage';
 import LoginPage from '../Pages/LoginPage';
@@ -34,14 +35,14 @@ function onNavBarClick() {
       if (!componentToRender) throw Error(`The ${uri} ressource does not exist.`);
 
       componentToRender();
-      window.history.pushState({}, '', uri);
+      window.history.pushState({}, '', usePathPrefix(uri));
     }
   });
 }
 
 function onHistoryChange() {
   window.addEventListener('popstate', () => {
-    const uri = window.location.pathname;
+    const uri = removePathPrefix(window.location.pathname);
     const componentToRender = routes[uri];
     componentToRender();
   });
@@ -49,7 +50,7 @@ function onHistoryChange() {
 
 function onFrontendLoad() {
   window.addEventListener('load', () => {
-    const uri = window.location.pathname;
+    const uri = removePathPrefix(window.location.pathname);
     const componentToRender = routes[uri];
     if (!componentToRender) throw Error(`The ${uri} ressource does not exist.`);
 

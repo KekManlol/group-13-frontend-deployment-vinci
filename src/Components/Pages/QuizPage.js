@@ -1,6 +1,5 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-nested-ternary */
-// import anime from 'animejs/lib/anime.es';
 import anime from 'animejs';
 import { clearPage } from '../../utils/render';
 import Navigate from '../Router/Navigate';
@@ -15,7 +14,7 @@ const QuizPage = async (id) => {
   if (!id) Navigate('/');
 
   idCurrentQuiz = id;
-  const response = await fetch(`${process.env.API_BASE_URL}/quiz/id/`.concat(id));
+  const response = await fetch('/api/quiz/id/'.concat(id));
 
   if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
@@ -390,13 +389,12 @@ function renderScore(score) {
   animationScorePage();
 }
 
-// code taken from the site https://www.w3schools.com/js/js_random.asp
 /* **************************************************************************************
 *    Title: A Proper Random Function
-*    Author: TOBIAS AHLIN
+*    Author: W3Schools
 *    Date: /
 *    Code version: /
-*    Availability: https://tobiasahlin.com/moving-letters/#6
+*    Availability: https://www.w3schools.com/js/js_random.asp
 *
 ************************************************************************************** */
 function getRndInteger(min, max) {

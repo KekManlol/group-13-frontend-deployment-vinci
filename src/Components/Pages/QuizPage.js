@@ -14,7 +14,7 @@ const QuizPage = async (id) => {
   if (!id) Navigate('/');
 
   idCurrentQuiz = id;
-  const response = await fetch('/api/quiz/id/'.concat(id));
+  const response = await fetch(`${process.env.API_BASE_URL}/quiz/id/`.concat(id));
 
   if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 

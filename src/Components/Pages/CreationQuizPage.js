@@ -343,6 +343,7 @@ async function onSubmit(e) {
 
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
     // const newQuiz = response.json();
+    console.log(JSON.stringify(quiz));
     Navigate('/');
   }
 }

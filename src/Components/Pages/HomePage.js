@@ -6,7 +6,7 @@ let quizzes;
 const HomePage = async () => {
   try {
     clearPage();
-    const response = await fetch('/api/quiz');
+    const response = await fetch(`${process.env.API_BASE_URL}/quiz`);
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
     quizzes = await response.json();
     renderHomePage();
@@ -127,7 +127,7 @@ function renderHomePage() {
 async function searchBar() {
   try {
     const quizName = document.querySelector('#quizName').value;
-    const response = await fetch(`/api/quiz/search?quiz-name=${quizName}`);
+    const response = await fetch(`${process.env.API_BASE_URL}/quiz/search?quiz-name=${quizName}`);
     if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
     quizzes = await response.json();
     clearPage();

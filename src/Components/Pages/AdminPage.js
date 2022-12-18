@@ -7,7 +7,7 @@ let currentTab = 0;
 const AdminPage = async () => {
   if (isAuthenticated() && getAuthenticatedUser().isAnAdmin === true) {
     clearPage();
-
+    currentTab = 0;
     const authenticatedUser = getAuthenticatedUser();
     const options = {
       method: 'GET',
@@ -156,6 +156,7 @@ function renderQuizList(quizList) {
       if (!response.ok)
         throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
       console.log('delete ' + JSON.stringify(response.url));
+      // /admin works on deployed but not in local, ../admin work in local but not on deployed
       Navigate('/admin');
     });
 
@@ -200,6 +201,15 @@ const clearRightTab = () => {
   rightTab.innerHTML = '';
 };
 
+/* **************************************************************************************
+*    Title: Form Wizard - Multi Step Form
+*    Author: W3schools
+*    Date: /
+*    Code version: /
+*    Availability: https://www.w3schools.com/howto/howto_js_form_steps.asp
+*
+************************************************************************************** */
+// début
 function showTab(n) {
   const x = document.getElementsByClassName('tab');
   x[n].style.display = 'block';
@@ -269,7 +279,7 @@ function renderCreateQuizForm(quiz) {
   const form = document.createElement('form');
   form.className = 'p-3';
   form.id = 'formulaire';
-  main.setAttribute('tabindex', '-1');
+  wrapper.setAttribute('tabindex', '-1');
 
   const rowNameReturn = document.createElement('div');
   rowNameReturn.classList.add('row');
@@ -504,7 +514,7 @@ function renderCreateQuizForm(quiz) {
   console.log('all input ' + JSON.stringify(inputList));
 
   // switch tab on arrowkey press event
-  main.addEventListener('keydown', (e) => {
+  wrapper.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       const prevBtn = document.getElementById('prevBtn');
       if (prevBtn.style.display !== 'none') {
